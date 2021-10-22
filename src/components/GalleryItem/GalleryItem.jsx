@@ -1,12 +1,25 @@
+import axios from 'axios';
 import { useState } from 'react';
 
-function GalleryItem({ galleryItem, addLike }) {
+function GalleryItem({ galleryItem, fetchGalleryItems }) {
   // tests whether the image or the description is being displayed
   const [flippedImage, setFlippedImage] = useState(false);
 
   const flipImage = () => {
     // toggle the flipped image boolean
     setFlippedImage(!flippedImage);
+  };
+
+  // will do a PUT to update the number of likes
+  const addLike = () => {
+    axios
+      .put(`gallery/like/${galleryItem.id}`)
+      .then((response) => {
+        fetchGalleryItems();
+      })
+      .catch((err) => {
+        console.log(`There was an error updating the data on the server:`, err);
+      });
   };
   return (
     <div className="galleryItem">
@@ -17,7 +30,7 @@ function GalleryItem({ galleryItem, addLike }) {
           <img src={galleryItem.path} alt={galleryItem.description} />
         )}
       </div>
-      <button onClick={() => addLike(item)}>Love it!</button>
+      <button onClick={() => addLike(galleryItem)}>Love it!</button>
       <p>
         {galleryItem.likes === 0
           ? `No people love this ... yet.`
