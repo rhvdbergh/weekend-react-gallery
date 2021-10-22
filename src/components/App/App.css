@@ -13,3 +13,11 @@
   font-size: 1.5em;
 }
 
+.galleryContainer {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.galleryItem {
+  margin: 20px;
+}

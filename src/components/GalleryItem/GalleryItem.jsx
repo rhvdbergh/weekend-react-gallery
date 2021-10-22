@@ -1,6 +1,6 @@
 function GalleryItem({ galleryItem }) {
   return (
-    <div>
+    <div className="galleryItem">
       <div>
         <img src={`${galleryItem.path}`} alt="" />
       </div>
