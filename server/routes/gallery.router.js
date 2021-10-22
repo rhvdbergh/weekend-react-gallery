@@ -9,12 +9,30 @@ const pool = require('../modules/pool.js');
 router.put('/like/:id', (req, res) => {
   console.log(req.params);
   const galleryId = req.params.id;
-  for (const galleryItem of galleryItems) {
-    if (galleryItem.id == galleryId) {
-      galleryItem.likes += 1;
-    }
-  }
-  res.sendStatus(200);
+
+  // build the SQL query
+  let queryText = `
+    UPDATE "gallery"
+    SET "likes" = "likes" + 1
+    WHERE "id" = $1; 
+  `;
+
+  // parameterize the input
+  let values = [galleryId];
+
+  // run the query
+  pool
+    .query(queryText, values)
+    .then((response) => {
+      res.sendStatus(200); // let the user know the response was correct
+    })
+    .catch((err) => {
+      console.log(
+        `There was an error connecting to the PostgreSQL server:`,
+        err
+      );
+      res.sendStatus(500); // let the client know there was an error
+    });
 }); // END PUT Route
 
 // GET Route
@@ -28,7 +46,7 @@ router.get('/', (req, res) => {
     .query(queryText)
     .then((response) => {
       // send the data, which in this case is response.rows
-      res.send(response.rows);
+      res.send(response.rows); // let the client know there was an error
     })
     .catch((err) => {
       console.log(
