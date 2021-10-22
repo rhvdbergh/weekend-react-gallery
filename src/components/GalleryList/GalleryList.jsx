@@ -1,3 +1,5 @@
-function GalleryList(props) {}
+function GalleryList(props) {
+  return null;
+}
 
 export default GalleryList;
