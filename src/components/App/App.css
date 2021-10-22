@@ -16,6 +16,9 @@
 .galleryContainer {
   display: flex;
   flex-wrap: wrap;
+  width: 85%;
+  margin: auto;
+  margin-top: 50px;
 }
 
 .galleryItem {
