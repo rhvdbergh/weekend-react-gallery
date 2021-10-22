@@ -3,7 +3,9 @@ import GalleryItem from '../GalleryItem/GalleryItem';
 function GalleryList({ galleryItems }) {
   return (
     <div className="galleryContainer">
-      <GalleryItem galleryItems={galleryItems} />
+      {galleryItems.map((galleryItem) => (
+        <GalleryItem key={galleryItem.id} galleryItem={galleryItem} />
+      ))}
     </div>
   );
 }
