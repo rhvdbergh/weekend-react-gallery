@@ -3,9 +3,13 @@ import { useState } from 'react';
 function GalleryItem({ galleryItem }) {
   const [flippedImage, setFlippedImage] = useState('false');
 
+  const flipImage = () => {
+    // toggle the flipped image boolean
+    setFlippedImage(!flippedImage);
+  };
   return (
     <div className="galleryItem">
-      <div className="imageContainer">
+      <div onClick={flipImage} className="imageContainer">
         {flippedImage ? (
           <img src={`${galleryItem.path}`} alt={`${galleryItem.description}`} />
         ) : (
