@@ -1,5 +1,7 @@
+import GalleryItem from '../GalleryItem/GalleryItem';
+
 function GalleryList(props) {
-  return null;
+  return <GalleryItem />;
 }
 
 export default GalleryList;
