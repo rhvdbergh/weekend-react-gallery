@@ -17,6 +17,7 @@ function App() {
     axios
       .get(`/gallery`)
       .then((response) => {
+        console.log(`response.data`, response.data);
         // response.data contains the relevant information, objects with GalleryItems
         setGalleryItems(response.data);
       })
@@ -24,6 +25,8 @@ function App() {
         console.log(`There was an error retrieving data form the server:`, err);
       });
   };
+
+  console.log('galleryItems', galleryItems);
 
   return (
     <div className="App">
