@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 function GalleryItem({ galleryItem }) {
   const [flippedImage, setFlippedImage] = useState('false');
+  const [numLikes, setNumLikes] = useState(0);
 
   const flipImage = () => {
     // toggle the flipped image boolean
@@ -16,8 +17,12 @@ function GalleryItem({ galleryItem }) {
           <p>{galleryItem.description}</p>
         )}
       </div>
-      <button>Love it!</button>
-      <p>No people love this.</p>
+      <button onClick={() => setNumLikes(numLikes + 1)}>Love it!</button>
+      <p>
+        {numLikes === 0
+          ? `No people love this ... yet.`
+          : `${numLikes} people love this.`}
+      </p>
     </div>
   );
 }
