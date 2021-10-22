@@ -1,8 +1,8 @@
 import { useState } from 'react';
 
-function GalleryItem({ galleryItem }) {
-  const [flippedImage, setFlippedImage] = useState('false');
-  const [numLikes, setNumLikes] = useState(0);
+function GalleryItem({ galleryItem, addLike }) {
+  // tests whether the image or the description is being displayed
+  const [flippedImage, setFlippedImage] = useState(false);
 
   const flipImage = () => {
     // toggle the flipped image boolean
@@ -12,16 +12,16 @@ function GalleryItem({ galleryItem }) {
     <div className="galleryItem">
       <div onClick={flipImage} className="imageContainer">
         {flippedImage ? (
-          <img src={`${galleryItem.path}`} alt={`${galleryItem.description}`} />
-        ) : (
           <p>{galleryItem.description}</p>
+        ) : (
+          <img src={galleryItem.path} alt={galleryItem.description} />
         )}
       </div>
-      <button onClick={() => setNumLikes(numLikes + 1)}>Love it!</button>
+      <button onClick={() => addLike(item)}>Love it!</button>
       <p>
-        {numLikes === 0
+        {galleryItem.likes === 0
           ? `No people love this ... yet.`
-          : `${numLikes} people love this.`}
+          : `${galleryItem.likes} people love this.`}
       </p>
     </div>
   );

@@ -26,6 +26,10 @@ function App() {
       });
   };
 
+  const addLike = (galleryItem) => {
+    console.log('in addLike');
+  };
+
   console.log('galleryItems', galleryItems);
 
   return (
@@ -33,7 +37,7 @@ function App() {
       <header className="App-header">
         <h1 className="App-title">Gallery of My Life</h1>
       </header>
-      <GalleryList galleryItems={galleryItems} />
+      <GalleryList galleryItems={galleryItems} addLike={addLike} />
     </div>
   );
 }
