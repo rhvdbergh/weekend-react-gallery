@@ -12,11 +12,12 @@ function App() {
     fetchGalleryItems();
   }, []);
 
+  // fetch all the gallery items from the server
   const fetchGalleryItems = () => {
     axios
       .get(`/gallery`)
       .then((response) => {
-        console.log(`got response.data`, response.data);
+        // response.data contains the relevant information, objects with GalleryItems
         setGalleryItems(response.data);
       })
       .catch((err) => {

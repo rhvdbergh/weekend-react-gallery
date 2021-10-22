@@ -1,7 +1,11 @@
 function GalleryItem({ galleryItems }) {
   return (
     <div>
-      <img src={`${galleryItems[0].path}`} alt="" />
+      <div>
+        <img src={`${galleryItems[0].path}`} alt="" />
+      </div>
+      <button>Love it!</button>
+      <p>No people love this.</p>
     </div>
   );
 }
