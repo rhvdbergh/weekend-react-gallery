@@ -110,6 +110,6 @@ router.delete(`/:id`, (req, res) => {
       );
       res.sendStatus(500); // let the client know there was an error
     });
-});
+}); // end DELETE Route
 
 module.exports = router;
