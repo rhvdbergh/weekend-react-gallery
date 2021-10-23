@@ -45,7 +45,7 @@ function GalleryItem({ galleryItem, fetchGalleryItems }) {
 
   return (
     <Card className="galleryItem">
-      <div className="imageContainer">
+      <div className="imageContainer" onClick={flipImage}>
         {flippedImage ? (
           <p className="imageDescription">{galleryItem.description}</p>
         ) : (
