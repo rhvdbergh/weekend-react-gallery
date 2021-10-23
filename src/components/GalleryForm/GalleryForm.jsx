@@ -34,26 +34,30 @@ function GalleryForm({ fetchGalleryItems }) {
     <div className="galleryForm">
       <form action="">
         {/* <label htmlFor="photoPath">Path to photo</label> */}
-        <TextField
-          variant="outlined"
-          label="Path to photo..."
-          value={pathInput}
-          id="photoPath"
-          placeholder="http://path_to_pic..."
-          onChange={() => {
-            setPathInput(event.target.value);
-          }}
-        />
-        <TextField
-          variant="outlined"
-          label="Description"
-          value={descriptionInput}
-          id="photoDescription"
-          placeholder="That time when..."
-          onChange={() => {
-            setDescriptionInput(event.target.value);
-          }}
-        />
+        <div className="space">
+          <TextField
+            variant="outlined"
+            label="Path to photo..."
+            value={pathInput}
+            id="photoPath"
+            placeholder="http://path_to_pic..."
+            onChange={() => {
+              setPathInput(event.target.value);
+            }}
+          />
+        </div>
+        <div className="space">
+          <TextField
+            variant="outlined"
+            label="Description"
+            value={descriptionInput}
+            id="photoDescription"
+            placeholder="That time when..."
+            onChange={() => {
+              setDescriptionInput(event.target.value);
+            }}
+          />
+        </div>
         <Button
           id="addPhotoButton"
           variant="contained"
