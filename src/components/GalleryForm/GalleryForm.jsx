@@ -8,7 +8,6 @@ function GalleryForm({ fetchGalleryItems }) {
 
   const addPhoto = (event) => {
     event.preventDefault();
-    console.log(`About to add a photo!`);
     // build a newPhoto object
     const newPhoto = {
       path: pathInput,
@@ -32,7 +31,6 @@ function GalleryForm({ fetchGalleryItems }) {
   return (
     <div className="galleryForm">
       <form action="">
-        <p>GalleryForm placeholder</p>
         <label htmlFor="photoPath">Path to photo</label>
         <input
           type="text"
