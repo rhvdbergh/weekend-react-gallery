@@ -21,6 +21,19 @@ function GalleryItem({ galleryItem, fetchGalleryItems }) {
         console.log(`There was an error updating the data on the server:`, err);
       });
   };
+
+  const deleteGalleryItem = () => {
+    axios
+      .delete(`/gallery/${galleryItem.id}`)
+      .then((response) => {
+        // refresh the DOM
+        fetchGalleryItems();
+      })
+      .catch((err) => {
+        console.log(`There was an error deleting the data on the server:`, err);
+      });
+  };
+
   return (
     <div className="galleryItem">
       <div onClick={flipImage} className="imageContainer">
@@ -40,6 +53,7 @@ function GalleryItem({ galleryItem, fetchGalleryItems }) {
           ? `No people love this ... yet.`
           : `${galleryItem.likes} people love this.`}
       </p>
+      <button onClick={deleteGalleryItem}>Remove Photo</button>
     </div>
   );
 }
