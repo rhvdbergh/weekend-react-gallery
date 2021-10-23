@@ -1,5 +1,14 @@
 import axios from 'axios';
 import { useState } from 'react';
+import { IconButton } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import InfoIcon from '@mui/icons-material/Info';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Typography from '@mui/material/Typography';
 
 function GalleryItem({ galleryItem, fetchGalleryItems }) {
   // tests whether the image or the description is being displayed
@@ -35,26 +44,39 @@ function GalleryItem({ galleryItem, fetchGalleryItems }) {
   };
 
   return (
-    <div className="galleryItem">
-      <div onClick={flipImage} className="imageContainer">
+    <Card className="galleryItem">
+      <div className="imageContainer" onClick={flipImage}>
         {flippedImage ? (
-          <p>{galleryItem.description}</p>
+          <p className="imageDescription">{galleryItem.description}</p>
         ) : (
-          <img
-            src={galleryItem.path}
+          <CardMedia
+            component="img"
+            height="220px"
+            image={galleryItem.path}
             alt={galleryItem.description}
             className="galleryPic"
           />
         )}
       </div>
-      <button onClick={() => addLike(galleryItem)}>Love it!</button>
-      <p>
-        {galleryItem.likes === 0
-          ? `No people love this ... yet.`
-          : `${galleryItem.likes} people love this.`}
-      </p>
-      <button onClick={deleteGalleryItem}>Remove Photo</button>
-    </div>
+      <CardContent>
+        <Typography variant="body2" color="secondary">
+          {galleryItem.likes === 0
+            ? `No people love this ... yet.`
+            : `${galleryItem.likes} people love this.`}
+        </Typography>
+      </CardContent>
+      <CardActions disableSpacing className="buttonsContainer">
+        <IconButton aria-label="like" onClick={() => addLike(galleryItem)}>
+          <FavoriteIcon color="primary" />
+        </IconButton>
+        <IconButton aria-label="info">
+          <InfoIcon color="info" onClick={flipImage} />
+        </IconButton>
+        <IconButton aria-label="delete" onClick={deleteGalleryItem}>
+          <DeleteIcon color="warning" />
+        </IconButton>
+      </CardActions>
+    </Card>
   );
 }
 
