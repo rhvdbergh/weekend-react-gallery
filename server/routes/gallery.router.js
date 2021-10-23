@@ -86,4 +86,30 @@ router.post('/', (req, res) => {
     });
 }); // END Post
 
+// DELETE Route
+router.delete(`/:id`, (req, res) => {
+  // build the sql query
+  let queryText = `
+    DELETE FROM "gallery"
+    WHERE "id" = $1;
+  `;
+
+  // parameterize the input
+  let values = [req.params.id];
+
+  // run the sql query
+  pool
+    .query(queryText, values)
+    .then((response) => {
+      res.sendStatus(204); // tell the client the db item was deleted
+    })
+    .catch((err) => {
+      console.log(
+        `There was an error connecting to the PostgreSQL server:`,
+        err
+      );
+      res.sendStatus(500); // let the client know there was an error
+    });
+}); // end DELETE Route
+
 module.exports = router;
