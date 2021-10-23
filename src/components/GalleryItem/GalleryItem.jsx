@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { IconButton } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import InfoIcon from '@mui/icons-material/Info';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -43,7 +44,7 @@ function GalleryItem({ galleryItem, fetchGalleryItems }) {
 
   return (
     <Card className="galleryItem">
-      <div onClick={flipImage} className="imageContainer">
+      <div className="imageContainer">
         {flippedImage ? (
           <p>{galleryItem.description}</p>
         ) : (
@@ -55,7 +56,7 @@ function GalleryItem({ galleryItem, fetchGalleryItems }) {
         )}
       </div>
       <CardContent>
-        <Typography variant="body2" color="text.secondary">
+        <Typography variant="body2" color="secondary">
           {galleryItem.likes === 0
             ? `No people love this ... yet.`
             : `${galleryItem.likes} people love this.`}
@@ -64,6 +65,9 @@ function GalleryItem({ galleryItem, fetchGalleryItems }) {
       <CardActions disableSpacing className="buttonsContainer">
         <IconButton aria-label="like" onClick={() => addLike(galleryItem)}>
           <FavoriteIcon color="primary" />
+        </IconButton>
+        <IconButton aria-label="info">
+          <InfoIcon color="info" onClick={flipImage} />
         </IconButton>
         <IconButton aria-label="delete" onClick={deleteGalleryItem}>
           <DeleteIcon color="warning" />
