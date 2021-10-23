@@ -34,3 +34,7 @@
   width: 100px;
   height: 150px;
 }
+
+.galleryPic {
+  max-height: 100%;
+}
