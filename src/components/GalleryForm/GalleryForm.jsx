@@ -1,5 +1,7 @@
 import axios from 'axios';
 import { useState } from 'react';
+import { Button } from '@mui/material';
+import { TextField } from '@mui/material';
 
 function GalleryForm({ fetchGalleryItems }) {
   // set up state to catch input from user
@@ -31,9 +33,10 @@ function GalleryForm({ fetchGalleryItems }) {
   return (
     <div className="galleryForm">
       <form action="">
-        <label htmlFor="photoPath">Path to photo</label>
-        <input
-          type="text"
+        {/* <label htmlFor="photoPath">Path to photo</label> */}
+        <TextField
+          variant="outlined"
+          label="Path to photo..."
           value={pathInput}
           id="photoPath"
           placeholder="http://path_to_pic..."
@@ -41,9 +44,9 @@ function GalleryForm({ fetchGalleryItems }) {
             setPathInput(event.target.value);
           }}
         />
-        <label htmlFor="photoDescription">Description</label>
-        <input
-          type="text"
+        <TextField
+          variant="outlined"
+          label="Description"
           value={descriptionInput}
           id="photoDescription"
           placeholder="That time when..."
@@ -51,7 +54,14 @@ function GalleryForm({ fetchGalleryItems }) {
             setDescriptionInput(event.target.value);
           }}
         />
-        <button onClick={addPhoto}>Add Photo</button>
+        <Button
+          id="addPhotoButton"
+          variant="contained"
+          color="success"
+          onClick={addPhoto}
+        >
+          Add Photo
+        </Button>
       </form>
     </div>
   );

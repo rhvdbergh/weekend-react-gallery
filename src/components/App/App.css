@@ -24,7 +24,7 @@
 .galleryItem {
   margin: 20px;
   width: 200px;
-  height: 300px;
+  height: 250px;
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -38,4 +38,29 @@
 .galleryPic {
   max-height: 100%;
   margin: auto;
+}
+
+.buttonsContainer {
+  display: flex;
+  justify-content: space-around;
+}
+
+form {
+  width: 100%;
+  margin-top: 50px;
+}
+
+#addPhotoButton {
+  height: 56px;
+  width: 170px;
+  font-weight: bolder;
+  font-size: 1.2em;
+}
+
+#photoDescription {
+  width: 350px;
+}
+
+#photoPath {
+  width: 350px;
 }
