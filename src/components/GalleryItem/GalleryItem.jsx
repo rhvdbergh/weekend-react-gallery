@@ -27,7 +27,11 @@ function GalleryItem({ galleryItem, fetchGalleryItems }) {
         {flippedImage ? (
           <p>{galleryItem.description}</p>
         ) : (
-          <img src={galleryItem.path} alt={galleryItem.description} />
+          <img
+            src={galleryItem.path}
+            alt={galleryItem.description}
+            className="galleryPic"
+          />
         )}
       </div>
       <button onClick={() => addLike(galleryItem)}>Love it!</button>
