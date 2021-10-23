@@ -1,7 +1,24 @@
+import axios from 'axios';
+
 function GalleryForm({ fetchGalleryItems }) {
   const addPhoto = (event) => {
     event.preventDefault();
     console.log(`About to add a photo!`);
+    // build a newPhoto object
+    const newPhoto = {
+      path: ``,
+      description: ``,
+    };
+
+    axios
+      .post(`/gallery`, newPhoto)
+      .then((response) => {
+        // refresh the DOM
+        fetchGalleryItems();
+      })
+      .catch((err) => {
+        console.log(`There was an error posting data to the server:`, err);
+      });
   };
 
   return (
