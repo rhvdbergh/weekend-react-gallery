@@ -24,7 +24,7 @@
 .galleryItem {
   margin: 20px;
   width: 200px;
-  height: 250px;
+  height: 270px;
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -32,7 +32,11 @@
 
 .imageContainer {
   width: 200px;
-  height: 150px;
+  height: 160px;
+}
+
+.imageDescription {
+  font-size: small;
 }
 
 .galleryPic {

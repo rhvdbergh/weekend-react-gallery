@@ -7,6 +7,7 @@ import InfoIcon from '@mui/icons-material/Info';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 
 function GalleryItem({ galleryItem, fetchGalleryItems }) {
@@ -46,10 +47,12 @@ function GalleryItem({ galleryItem, fetchGalleryItems }) {
     <Card className="galleryItem">
       <div className="imageContainer">
         {flippedImage ? (
-          <p>{galleryItem.description}</p>
+          <p className="imageDescription">{galleryItem.description}</p>
         ) : (
-          <img
-            src={galleryItem.path}
+          <CardMedia
+            component="img"
+            height="220px"
+            image={galleryItem.path}
             alt={galleryItem.description}
             className="galleryPic"
           />
