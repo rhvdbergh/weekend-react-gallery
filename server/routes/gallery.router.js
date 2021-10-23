@@ -57,4 +57,33 @@ router.get('/', (req, res) => {
     });
 }); // END GET Route
 
+// POST Route
+router.post('/', (req, res) => {
+  console.log(`POST /gallery, with req.body=`, req.body);
+  // build the sql query
+  let queryText = `
+    INSERT INTO "gallery"
+    ("path", "description")
+    VALUES
+    ($1, $2)
+  `;
+
+  // parameterize the inputs
+  let values = [req.body.path, req.body.description];
+
+  // run the sql query
+  pool
+    .query(queryText, values)
+    .then((response) => {
+      res.sendStatus(201); // tell the client the db item was created
+    })
+    .catch((err) => {
+      console.log(
+        `There was an error connecting to the PostgreSQL server:`,
+        err
+      );
+      res.sendStatus(500); // let the client know there was an error
+    });
+}); // END Post
+
 module.exports = router;
