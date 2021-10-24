@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Button } from '@mui/material';
 import { TextField } from '@mui/material';
 import Uppy from '@uppy/core';
-import Tus from '@uppy/tus';
+import XHRUpload from '@uppy/xhr-upload';
 import { DashboardModal, useUppy } from '@uppy/react';
 import '@uppy/core/dist/style.min.css';
 import '@uppy/dashboard/dist/style.min.css';
@@ -11,7 +11,11 @@ import '@uppy/dashboard/dist/style.min.css';
 function GalleryForm({ fetchGalleryItems }) {
   const uppy = useUppy(() => {
     // set the endpoint - where the files should be uploaded to
-    return new Uppy().use(Tus, { endpoint: '/gallery', resume: true });
+    return new Uppy().use(XHRUpload, {
+      method: 'post',
+      formData: true,
+      endpoint: '/gallery/upload',
+    });
   });
   // initialize an uppy instance with the useUppy hook
   // set up state to catch input from user

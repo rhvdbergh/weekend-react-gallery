@@ -86,6 +86,12 @@ router.post('/', (req, res) => {
     });
 }); // END Post
 
+// POST Route to upload file(s)
+router.post('/upload', (req, res) => {
+  console.log(`req.files`, req.files);
+  res.sendStatus(200);
+});
+
 // DELETE Route
 router.delete(`/:id`, (req, res) => {
   // build the sql query
