@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const galleryItems = require('../modules/gallery.data');
 const pool = require('../modules/pool.js');
+const fs = require('fs');
 
 // DO NOT MODIFY THIS FILE FOR BASE MODE
 
@@ -89,8 +90,12 @@ router.post('/', (req, res) => {
 // POST Route to upload file(s)
 router.post('/upload', (req, res) => {
   console.log(`req.files`, req.files);
-  res.sendStatus(200);
-});
+  // set the filename and the directory to store the image
+  const fileName = `./server/images/${req.files.file.name}`;
+  // write the image to the server
+  fs.writeFile(fileName, req.files.file.data, () => {});
+  res.sendStatus(204);
+}); // END POST to upload files
 
 // DELETE Route
 router.delete(`/:id`, (req, res) => {
