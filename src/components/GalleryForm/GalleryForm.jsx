@@ -179,17 +179,34 @@ function GalleryForm({ fetchGalleryItems }) {
       >
         <h2>Please add photo description(s).</h2>
         <form id="descriptionBoxContainer">
-          {uploadedPhotos.map((photo) => {
-            return (
-              <DescriptionBox
-                key={photo.id}
-                photoPath={photo.path}
-                updateUploadedPhotoDescription={updateUploadedPhotoDescription}
-                photoIndex={photo.id}
-                photoDescription={updatedDescriptions[photo.id]}
-              />
-            );
-          })}
+          <div id="descriptionBoxContainer">
+            {uploadedPhotos.map((photo) => {
+              return (
+                <DescriptionBox
+                  key={photo.id}
+                  photoPath={photo.path}
+                  updateUploadedPhotoDescription={
+                    updateUploadedPhotoDescription
+                  }
+                  photoIndex={photo.id}
+                  photoDescription={updatedDescriptions[photo.id]}
+                />
+              );
+            })}
+          </div>
+          <div id="descriptionBoxButtonContainer">
+            <Button
+              id="descriptionModalButton"
+              variant="contained"
+              color="success"
+              onClick={() => {
+                updateDescriptionsOnServer();
+                setDescriptionModalOpen(false);
+              }}
+            >
+              Update Descriptions
+            </Button>
+          </div>
         </form>
       </Modal>
     </div>
