@@ -77,6 +77,7 @@ router.post('/', (req, res) => {
     ("path", "description")
     VALUES
     ($1, $2)
+    RETURNING "id", "path", "description";
   `;
 
   // parameterize the inputs
@@ -86,7 +87,8 @@ router.post('/', (req, res) => {
   pool
     .query(queryText, values)
     .then((response) => {
-      res.sendStatus(201); // tell the client the db item was created
+      console.log(`response on successful post`, response);
+      res.status(201).send({ uploadedPhoto: response.rows[0] }); // tell the client the db item was created, and send back the id
     })
     .catch((err) => {
       console.log(

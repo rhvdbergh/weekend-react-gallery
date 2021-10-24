@@ -28,7 +28,9 @@ function GalleryForm({ fetchGalleryItems }) {
           (res) => `/gallery/images/${res.name}`
         );
 
-        setUploadedPhotosPaths(paths);
+        // clear the uploadedPhotos to ensure only newly uploaded files are in
+        // the descriptionModalBox
+        setUploadedPhotos([]);
 
         // add these photos to the database, albeit without description
         for (let path of paths) {
@@ -37,7 +39,6 @@ function GalleryForm({ fetchGalleryItems }) {
             description: '',
           };
           postPhoto(newPhoto);
-          // setDescriptionModalOpen(false);
         }
         setDescriptionModalOpen(true);
       });
@@ -47,16 +48,17 @@ function GalleryForm({ fetchGalleryItems }) {
   const [descriptionInput, setDescriptionInput] = useState('');
   const [uploadModalOpen, setUploadModalOpen] = useState(false);
   const [descriptionModalOpen, setDescriptionModalOpen] = useState(false);
-  const [uploadedPhotosDescriptions, setUploadedPhotosDescriptions] = useState(
-    []
-  );
-  const [uploadedPhotosPaths, setUploadedPhotosPaths] = useState([]);
+  const [uploadedPhotos, setUploadedPhotos] = useState([]);
+  const [updatedDescriptions, setUpdatedDescriptions] = useState({});
+  let tempDescriptions = {};
 
+  // TODO: feed the rigth info here
   const updateUploadedPhotoDescription = (photoIndex, description) => {
-    const updatedArray = [...uploadedPhotosDescriptions];
-    updatedArray[photoIndex] = description;
-    setUploadedPhotosDescriptions(updatedArray);
+    tempDescriptions = { ...updatedDescriptions };
+    tempDescriptions[photoIndex] = description;
+    setUpdatedDescriptions({ ...tempDescriptions });
   };
+
   const addPhoto = (event) => {
     event.preventDefault();
     // build a newPhoto object
@@ -71,6 +73,8 @@ function GalleryForm({ fetchGalleryItems }) {
     axios
       .post(`/gallery`, photo)
       .then((response) => {
+        // add this id, path, and description so we can access it later
+        setUploadedPhotos([...uploadedPhotos, response.data.uploadedPhoto]);
         // refresh the DOM
         fetchGalleryItems();
         // clear the inputs
@@ -81,6 +85,12 @@ function GalleryForm({ fetchGalleryItems }) {
         console.log(`There was an error posting data to the server:`, err);
       });
   };
+
+  const updateDescriptionsOnServer = () => {
+    console.log(`about to update those descriptions`);
+  };
+
+  console.log(`at this point, uploadedPhotos is`, uploadedPhotos);
 
   return (
     <div className="galleryForm">
@@ -141,18 +151,21 @@ function GalleryForm({ fetchGalleryItems }) {
       <Modal
         isOpen={descriptionModalOpen}
         onRequestClose={() => {
+          updateDescriptionsOnServer();
           setDescriptionModalOpen(false);
         }}
       >
-        <h2>Please add a description to this photo.</h2>
+        <h2>Please add photo description(s).</h2>
         <form id="descriptionBoxContainer">
-          {uploadedPhotosPaths.map((photoPath, index) => {
+          {uploadedPhotos.map((photo) => {
+            console.log(`currently handling photo`, photo);
             return (
               <DescriptionBox
-                photoPath={photoPath}
+                key={photo.id}
+                photoPath={photo.path}
                 updateUploadedPhotoDescription={updateUploadedPhotoDescription}
-                photoIndex={index}
-                photoDescription={uploadedPhotosDescriptions[index]}
+                photoIndex={photo.id}
+                photoDescription={photo.description}
               />
             );
           })}
