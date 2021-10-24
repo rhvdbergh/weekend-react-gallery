@@ -173,6 +173,7 @@ function GalleryForm({ fetchGalleryItems }) {
       />
 
       <Modal
+        style={{ overlay: { zIndex: 999 } }}
         isOpen={descriptionModalOpen}
         onRequestClose={() => {
           updateDescriptionsOnServer();
@@ -180,7 +181,7 @@ function GalleryForm({ fetchGalleryItems }) {
         }}
       >
         <h2>Please add photo description(s) to the uploaded photo(s).</h2>
-        <form id="descriptionBoxContainer">
+        <form id="descriptionBoxForm">
           <div id="descriptionBoxContainer">
             {uploadedPhotos.map((photo) => {
               return (

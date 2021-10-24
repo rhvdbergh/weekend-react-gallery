@@ -15,7 +15,9 @@ function DescriptionBox({
 
   return (
     <div className="descriptionBox">
-      <img className="descriptionImage" src={photoPath} alt="" />
+      <div className="imageContainer descriptionImageContainer">
+        <img className="galleryPic" src={photoPath} alt="" />
+      </div>
       <div className="space">
         <TextField
           variant="outlined"

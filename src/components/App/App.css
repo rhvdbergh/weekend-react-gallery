@@ -43,13 +43,21 @@ body {
   height: 160px;
 }
 
+.descriptionImageContainer {
+  display: flex;
+  justify-content: center;
+}
+
 .imageDescription {
   font-size: small;
 }
 
 .galleryPic {
   max-height: 100%;
+  max-width: 100%;
   margin: auto;
+  width: auto;
+  height: auto;
 }
 
 .buttonsContainer {
@@ -65,11 +73,8 @@ body {
 .descriptionBox {
   display: flex;
   align-items: center;
-}
-
-.descriptionImage {
-  width: 200px;
-  max-height: 100%;
+  justify-content: center;
+  margin: 30px;
 }
 
 #addPhotoForm {
@@ -81,13 +86,19 @@ body {
 }
 
 #addPhotoButton,
-#uploadPhotoButton {
+#uploadPhotoButton,
+#descriptionModalButton {
   height: 56px;
   width: 170px;
   font-weight: bolder;
   font-size: 1.2em;
   margin: 0px 10px;
   margin-top: 30px;
+}
+
+#descriptionModalButton {
+  width: 300px;
+  margin-bottom: 50px;
 }
 
 #uploadPhotoButton {
@@ -103,6 +114,13 @@ body {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+}
+
+#descriptionBoxForm {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 #galleryForm {
