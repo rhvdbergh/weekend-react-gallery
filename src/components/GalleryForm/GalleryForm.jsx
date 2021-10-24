@@ -11,7 +11,7 @@ import '@uppy/dashboard/dist/style.min.css';
 function GalleryForm({ fetchGalleryItems }) {
   const uppy = useUppy(() => {
     // set the endpoint - where the files should be uploaded to
-    return new Uppy().use(Tus, { endpoint: '/images', resume: true });
+    return new Uppy().use(Tus, { endpoint: '/gallery', resume: true });
   });
   // initialize an uppy instance with the useUppy hook
   // set up state to catch input from user
@@ -88,7 +88,13 @@ function GalleryForm({ fetchGalleryItems }) {
           Upload Photo
         </Button>
       </form>
-      <DashboardModal uppy={uppy} open={uploadModalOpen} />
+      <DashboardModal
+        uppy={uppy}
+        open={uploadModalOpen}
+        onRequestClose={() => {
+          setUploadModalOpen(false);
+        }}
+      />
     </div>
   );
 }
