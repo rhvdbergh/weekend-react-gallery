@@ -115,8 +115,8 @@ function GalleryForm({ fetchGalleryItems }) {
   console.log(`at this point, descriptions are`, updatedDescriptions);
 
   return (
-    <div className="galleryForm">
-      <form action="">
+    <div id="galleryForm">
+      <form id="addPhotoForm">
         {/* <label htmlFor="photoPath">Path to photo</label> */}
         <div className="space">
           <TextField
@@ -150,6 +150,8 @@ function GalleryForm({ fetchGalleryItems }) {
         >
           Add Photo
         </Button>
+      </form>
+      <form id="uploadPhotoForm">
         <Button
           id="uploadPhotoButton"
           variant="contained"
@@ -177,7 +179,7 @@ function GalleryForm({ fetchGalleryItems }) {
           setDescriptionModalOpen(false);
         }}
       >
-        <h2>Please add photo description(s).</h2>
+        <h2>Please add photo description(s) to the uploaded photo(s).</h2>
         <form id="descriptionBoxContainer">
           <div id="descriptionBoxContainer">
             {uploadedPhotos.map((photo) => {

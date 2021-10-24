@@ -19,15 +19,19 @@ body {
 }
 
 .galleryContainer {
-  display: flex;
-  flex-wrap: wrap;
-  width: 85%;
   margin: auto;
-  margin-top: 35px;
+  margin-top: 50px;
+  width: 90%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 200px);
+  grid-template-rows: repeat(auto-fill, 270px);
+  grid-row-gap: 2em;
+  grid-column-gap: 2em;
+  justify-content: center;
 }
 
 .galleryItem {
-  margin: 20px;
+  /* margin: 20px; */
   width: 200px;
   height: 270px;
   display: flex;
@@ -68,19 +72,34 @@ body {
   max-height: 100%;
 }
 
-form {
-  width: 100%;
+#addPhotoForm {
+  width: 75%;
   margin-top: 50px;
   display: flex;
   justify-content: center;
 }
 
-#addPhotoButton {
+#uploadPhotoForm {
+  width: 250px;
+  margin-top: 50px;
+  display: flex;
+  justify-content: left;
+}
+
+#addPhotoButton,
+#uploadPhotoButton {
   height: 56px;
   width: 170px;
   font-weight: bolder;
   font-size: 1.2em;
-  margin-left: 10px;
+  margin: 0px 10px;
+}
+
+#addPhotoButton {
+}
+
+#uploadPhotoButton {
+  width: 250px;
 }
 
 #photoDescription {
@@ -95,4 +114,9 @@ form {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+}
+
+#galleryForm {
+  display: flex;
+  justify-content: center;
 }
