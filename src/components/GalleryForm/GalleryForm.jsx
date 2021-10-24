@@ -94,7 +94,6 @@ function GalleryForm({ fetchGalleryItems }) {
     console.log(`about to update those descriptions`);
   };
 
-  console.log(`at this point, uploadedPhotos are`, uploadedPhotos);
   console.log(`at this point, descriptions are`, updatedDescriptions);
 
   return (
@@ -169,7 +168,7 @@ function GalleryForm({ fetchGalleryItems }) {
                 photoPath={photo.path}
                 updateUploadedPhotoDescription={updateUploadedPhotoDescription}
                 photoIndex={photo.id}
-                photoDescription={photo.description}
+                photoDescription={updatedDescriptions[photo.id]}
               />
             );
           })}
