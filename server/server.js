@@ -8,6 +8,7 @@ const PORT = process.env.PORT || 5000;
 /** ---------- MIDDLEWARE ---------- **/
 app.use(bodyParser.json()); // needed for axios requests
 app.use(express.static('build'));
+app.use(express.static('./images'));
 app.use(fileUpload({}));
 
 /** ---------- EXPRESS ROUTES ---------- **/

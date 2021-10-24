@@ -11,11 +11,20 @@ import '@uppy/dashboard/dist/style.min.css';
 function GalleryForm({ fetchGalleryItems }) {
   const uppy = useUppy(() => {
     // set the endpoint - where the files should be uploaded to
-    return new Uppy().use(XHRUpload, {
-      method: 'post',
-      formData: true,
-      endpoint: '/gallery/upload',
-    });
+    return new Uppy()
+      .use(XHRUpload, {
+        method: 'post',
+        formData: true,
+        endpoint: '/gallery/upload',
+      })
+      .on(`complete`, (result) => {
+        // we're only interested in the photo names,
+        // and they live on result.successful in an array of objects,
+        // each with .name
+        let paths = result.successful.map(
+          (res) => `/gallery/image/${res.name}`
+        );
+      });
   });
   // initialize an uppy instance with the useUppy hook
   // set up state to catch input from user
@@ -89,7 +98,7 @@ function GalleryForm({ fetchGalleryItems }) {
             setUploadModalOpen(true);
           }}
         >
-          Upload Photo
+          Upload Photo(s)
         </Button>
       </form>
       <DashboardModal
