@@ -58,6 +58,16 @@ body {
   margin: 0px 10px;
 }
 
+.descriptionBox {
+  display: flex;
+  align-items: center;
+}
+
+.descriptionImage {
+  width: 200px;
+  max-height: 100%;
+}
+
 form {
   width: 100%;
   margin-top: 50px;
@@ -79,4 +89,10 @@ form {
 
 #photoPath {
   width: 350px;
+}
+
+#descriptionBoxContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 }

@@ -8,6 +8,7 @@ import { DashboardModal, useUppy } from '@uppy/react';
 import '@uppy/core/dist/style.min.css';
 import '@uppy/dashboard/dist/style.min.css';
 import Modal from 'react-modal';
+import DescriptionBox from '../DescriptionBox/DescriptionBox';
 
 function GalleryForm({ fetchGalleryItems }) {
   // initialize an uppy instance with the useUppy hook
@@ -23,9 +24,11 @@ function GalleryForm({ fetchGalleryItems }) {
         // we're only interested in the photo names,
         // and they live on result.successful in an array of objects,
         // each with .name
-        let paths = result.successful.map(
+        const paths = result.successful.map(
           (res) => `/gallery/images/${res.name}`
         );
+
+        setUploadedPhotosPaths(paths);
 
         // add these photos to the database, albeit without description
         for (let path of paths) {
@@ -44,7 +47,16 @@ function GalleryForm({ fetchGalleryItems }) {
   const [descriptionInput, setDescriptionInput] = useState('');
   const [uploadModalOpen, setUploadModalOpen] = useState(false);
   const [descriptionModalOpen, setDescriptionModalOpen] = useState(false);
+  const [uploadedPhotosDescriptions, setUploadedPhotosDescriptions] = useState(
+    []
+  );
+  const [uploadedPhotosPaths, setUploadedPhotosPaths] = useState([]);
 
+  const updateUploadedPhotoDescription = (photoIndex, description) => {
+    const updatedArray = [...uploadedPhotosDescriptions];
+    updatedArray[photoIndex] = description;
+    setUploadedPhotosDescriptions(updatedArray);
+  };
   const addPhoto = (event) => {
     event.preventDefault();
     // build a newPhoto object
@@ -133,6 +145,18 @@ function GalleryForm({ fetchGalleryItems }) {
         }}
       >
         <h2>Please add a description to this photo.</h2>
+        <form id="descriptionBoxContainer">
+          {uploadedPhotosPaths.map((photoPath, index) => {
+            return (
+              <DescriptionBox
+                photoPath={photoPath}
+                updateUploadedPhotoDescription={updateUploadedPhotoDescription}
+                photoIndex={index}
+                photoDescription={uploadedPhotosDescriptions[index]}
+              />
+            );
+          })}
+        </form>
       </Modal>
     </div>
   );
