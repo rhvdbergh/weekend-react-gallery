@@ -15,6 +15,7 @@
     "express-fileupload": "^1.2.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-modal": "^3.14.3",
     "react-scripts": "^4.0.1"
   },
   "devDependencies": {

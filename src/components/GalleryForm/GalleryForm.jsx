@@ -7,8 +7,10 @@ import XHRUpload from '@uppy/xhr-upload';
 import { DashboardModal, useUppy } from '@uppy/react';
 import '@uppy/core/dist/style.min.css';
 import '@uppy/dashboard/dist/style.min.css';
+import Modal from 'react-modal';
 
 function GalleryForm({ fetchGalleryItems }) {
+  // initialize an uppy instance with the useUppy hook
   const uppy = useUppy(() => {
     // set the endpoint - where the files should be uploaded to
     return new Uppy()
@@ -18,6 +20,7 @@ function GalleryForm({ fetchGalleryItems }) {
         endpoint: '/gallery/upload',
       })
       .on(`complete`, (result) => {
+        event.preventDefault();
         // we're only interested in the photo names,
         // and they live on result.successful in an array of objects,
         // each with .name
@@ -30,14 +33,17 @@ function GalleryForm({ fetchGalleryItems }) {
             description: '',
           };
           postPhoto(newPhoto);
+          setDescriptionModalOpen(true);
+          // setDescriptionModalOpen(false);
         }
       });
   });
-  // initialize an uppy instance with the useUppy hook
+
   // set up state to catch input from user
   const [pathInput, setPathInput] = useState('');
   const [descriptionInput, setDescriptionInput] = useState('');
   const [uploadModalOpen, setUploadModalOpen] = useState(false);
+  const [descriptionModalOpen, setDescriptionModalOpen] = useState(false);
 
   const addPhoto = (event) => {
     event.preventDefault();
@@ -118,6 +124,15 @@ function GalleryForm({ fetchGalleryItems }) {
           setUploadModalOpen(false);
         }}
       />
+
+      <Modal
+        isOpen={descriptionModalOpen}
+        onRequestClose={() => {
+          setDescriptionModalOpen(false);
+        }}
+      >
+        <h2>Please add a description to this photo.</h2>
+      </Modal>
     </div>
   );
 }
