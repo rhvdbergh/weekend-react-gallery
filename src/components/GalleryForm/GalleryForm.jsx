@@ -24,6 +24,10 @@ function GalleryForm({ fetchGalleryItems }) {
         let paths = result.successful.map(
           (res) => `/gallery/image/${res.name}`
         );
+
+        // add these photos to the database, albeit without description
+        for (let path of paths) {
+        }
       });
   });
   // initialize an uppy instance with the useUppy hook
@@ -39,9 +43,12 @@ function GalleryForm({ fetchGalleryItems }) {
       path: pathInput,
       description: descriptionInput,
     };
+    postPhoto(newPhoto);
+  };
 
+  const postPhoto = (photo) => {
     axios
-      .post(`/gallery`, newPhoto)
+      .post(`/gallery`, photo)
       .then((response) => {
         // refresh the DOM
         fetchGalleryItems();
