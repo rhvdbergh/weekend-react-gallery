@@ -24,7 +24,9 @@ function GalleryForm({ fetchGalleryItems }) {
         // we're only interested in the photo names,
         // and they live on result.successful in an array of objects,
         // each with .name
-        let paths = result.successful.map((res) => `images/${res.name}`);
+        let paths = result.successful.map(
+          (res) => `/gallery/images/${res.name}`
+        );
 
         // add these photos to the database, albeit without description
         for (let path of paths) {

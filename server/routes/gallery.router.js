@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const pool = require('../modules/pool.js');
+const path = require('path');
 const fs = require('fs');
 
 // DO NOT MODIFY THIS FILE FOR BASE MODE
@@ -57,6 +58,16 @@ router.get('/', (req, res) => {
     });
 }); // END GET Route
 
+// GET Route for images stored on the server
+router.get('/images/:name', (req, res) => {
+  console.log(`this is the file we are looking for:`, req.params.name);
+  // let fileName = `server/images/${req.params.name}`;
+  const options = {
+    root: path.join('server/images'),
+  };
+  res.sendFile(req.params.name, options);
+});
+
 // POST Route
 router.post('/', (req, res) => {
   console.log(`POST /gallery, with req.body=`, req.body);
@@ -90,7 +101,7 @@ router.post('/', (req, res) => {
 router.post('/upload', (req, res) => {
   console.log(`req.files`, req.files);
   // set the filename and the directory to store the image
-  const fileName = `./public/images/${req.files.file.name}`;
+  const fileName = `./server/images/${req.files.file.name}`;
   // write the image to the server
   fs.writeFile(fileName, req.files.file.data, () => {});
   res.sendStatus(204);
