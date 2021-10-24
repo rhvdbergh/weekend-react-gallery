@@ -127,3 +127,17 @@ body {
   display: flex;
   justify-content: center;
 }
+
+.displayModalContainer {
+  height: 600px;
+  width: 800px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+}
+
+.displayModalImage {
+  max-height: 100%;
+  max-width: 100%;
+}
