@@ -4,13 +4,19 @@ import { IconButton } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import InfoIcon from '@mui/icons-material/Info';
+import OpenInFullIcon from '@mui/icons-material/OpenInFull';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 
-function GalleryItem({ galleryItem, fetchGalleryItems }) {
+function GalleryItem({
+  galleryItem,
+  fetchGalleryItems,
+  setPicModalOpen,
+  setCurrentFocusPic,
+}) {
   // tests whether the image or the description is being displayed
   const [flippedImage, setFlippedImage] = useState(false);
 
@@ -43,6 +49,11 @@ function GalleryItem({ galleryItem, fetchGalleryItems }) {
       });
   };
 
+  const openImage = () => {
+    setCurrentFocusPic(galleryItem);
+    setPicModalOpen(true);
+  };
+
   return (
     <Card className="galleryItem">
       <div className="imageContainer" onClick={flipImage}>
@@ -71,6 +82,9 @@ function GalleryItem({ galleryItem, fetchGalleryItems }) {
         </IconButton>
         <IconButton aria-label="info" onClick={flipImage}>
           <InfoIcon color="info" />
+        </IconButton>
+        <IconButton aria-label="info" onClick={openImage}>
+          <OpenInFullIcon color="secondary" />
         </IconButton>
         <IconButton aria-label="delete" onClick={deleteGalleryItem}>
           <DeleteIcon color="warning" />
