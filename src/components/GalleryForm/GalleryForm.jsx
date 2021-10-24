@@ -20,7 +20,6 @@ function GalleryForm({ fetchGalleryItems }) {
         endpoint: '/gallery/upload',
       })
       .on(`complete`, (result) => {
-        event.preventDefault();
         // we're only interested in the photo names,
         // and they live on result.successful in an array of objects,
         // each with .name
@@ -35,12 +34,11 @@ function GalleryForm({ fetchGalleryItems }) {
             description: '',
           };
           postPhoto(newPhoto);
-          setDescriptionModalOpen(true);
           // setDescriptionModalOpen(false);
         }
+        setDescriptionModalOpen(true);
       });
   });
-
   // set up state to catch input from user
   const [pathInput, setPathInput] = useState('');
   const [descriptionInput, setDescriptionInput] = useState('');
@@ -125,6 +123,7 @@ function GalleryForm({ fetchGalleryItems }) {
         onRequestClose={() => {
           setUploadModalOpen(false);
         }}
+        closeAfterFinish={true}
       />
 
       <Modal
