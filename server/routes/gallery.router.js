@@ -6,7 +6,7 @@ const fs = require('fs');
 
 // DO NOT MODIFY THIS FILE FOR BASE MODE
 
-// PUT Route
+// PUT Route to increase likes
 router.put('/like/:id', (req, res) => {
   console.log(req.params);
   const galleryId = req.params.id;
@@ -35,6 +35,33 @@ router.put('/like/:id', (req, res) => {
       res.sendStatus(500); // let the client know there was an error
     });
 }); // END PUT Route
+
+// PUT Route to update descriptions
+router.put(`/description/:id`, (req, res) => {
+  // build the SQL query
+  let queryText = `
+    UPDATE "gallery"
+    SET "description" = $1
+    WHERE "id" = $2;
+  `;
+
+  // parameterize the input values
+  let values = [req.body.description, req.params.id];
+
+  // run the SQL query
+  pool
+    .query(queryText, values)
+    .then((response) => {
+      res.sendStatus(200);
+    })
+    .catch((err) => {
+      console.log(
+        `There was an error connecting to the PostgreSQL server:`,
+        err
+      );
+      res.sendStatus(500); // let the client know there was an error
+    });
+}); // END PUT Route to update descriptions
 
 // GET Route
 router.get('/', (req, res) => {
