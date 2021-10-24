@@ -69,8 +69,8 @@ function GalleryItem({ galleryItem, fetchGalleryItems }) {
         <IconButton aria-label="like" onClick={() => addLike(galleryItem)}>
           <FavoriteIcon color="primary" />
         </IconButton>
-        <IconButton aria-label="info">
-          <InfoIcon color="info" onClick={flipImage} />
+        <IconButton aria-label="info" onClick={flipImage}>
+          <InfoIcon color="info" />
         </IconButton>
         <IconButton aria-label="delete" onClick={deleteGalleryItem}>
           <DeleteIcon color="warning" />
