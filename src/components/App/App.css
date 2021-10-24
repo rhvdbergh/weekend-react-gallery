@@ -31,7 +31,6 @@ body {
 }
 
 .galleryItem {
-  /* margin: 20px; */
   width: 200px;
   height: 270px;
   display: flex;
@@ -60,6 +59,7 @@ body {
 
 .space {
   margin: 0px 10px;
+  margin-top: 30px;
 }
 
 .descriptionBox {
@@ -73,17 +73,11 @@ body {
 }
 
 #addPhotoForm {
-  width: 75%;
+  width: 95%;
   margin-top: 50px;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
-}
-
-#uploadPhotoForm {
-  width: 250px;
-  margin-top: 50px;
-  display: flex;
-  justify-content: left;
 }
 
 #addPhotoButton,
@@ -93,19 +87,14 @@ body {
   font-weight: bolder;
   font-size: 1.2em;
   margin: 0px 10px;
-}
-
-#addPhotoButton {
+  margin-top: 30px;
 }
 
 #uploadPhotoButton {
   width: 250px;
 }
 
-#photoDescription {
-  width: 350px;
-}
-
+#photoDescription,
 #photoPath {
   width: 350px;
 }

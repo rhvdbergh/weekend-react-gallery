@@ -142,26 +142,26 @@ function GalleryForm({ fetchGalleryItems }) {
             }}
           />
         </div>
-        <Button
-          id="addPhotoButton"
-          variant="contained"
-          color="success"
-          onClick={addPhoto}
-        >
-          Add Photo
-        </Button>
-      </form>
-      <form id="uploadPhotoForm">
-        <Button
-          id="uploadPhotoButton"
-          variant="contained"
-          color="success"
-          onClick={() => {
-            setUploadModalOpen(true);
-          }}
-        >
-          Upload Photo(s)
-        </Button>
+        <div className="buttons">
+          <Button
+            id="addPhotoButton"
+            variant="contained"
+            color="success"
+            onClick={addPhoto}
+          >
+            Add Photo
+          </Button>
+          <Button
+            id="uploadPhotoButton"
+            variant="contained"
+            color="success"
+            onClick={() => {
+              setUploadModalOpen(true);
+            }}
+          >
+            Upload Photo(s)
+          </Button>
+        </div>
       </form>
       <DashboardModal
         uppy={uppy}
