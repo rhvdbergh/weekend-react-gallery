@@ -56,7 +56,6 @@ function GalleryForm({ fetchGalleryItems }) {
   const [uploadedPhotos, setUploadedPhotos] = useState([]);
   const [updatedDescriptions, setUpdatedDescriptions] = useState({});
 
-  // TODO: feed the rigth info here
   const updateUploadedPhotoDescription = (photoIndex, description) => {
     tempDescriptions = { ...updatedDescriptions };
     tempDescriptions[photoIndex] = description;
