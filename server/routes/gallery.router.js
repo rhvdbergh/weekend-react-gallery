@@ -90,7 +90,7 @@ router.post('/', (req, res) => {
 router.post('/upload', (req, res) => {
   console.log(`req.files`, req.files);
   // set the filename and the directory to store the image
-  const fileName = `./server/images/${req.files.file.name}`;
+  const fileName = `./public/images/${req.files.file.name}`;
   // write the image to the server
   fs.writeFile(fileName, req.files.file.data, () => {});
   res.sendStatus(204);

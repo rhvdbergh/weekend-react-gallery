@@ -34,7 +34,10 @@ function App() {
       <header className="App-header">
         <h1 className="App-title">Gallery of My Life</h1>
       </header>
-      <GalleryForm fetchGalleryItems={fetchGalleryItems} />
+      <GalleryForm
+        fetchGalleryItems={fetchGalleryItems}
+        galleryItems={galleryItems}
+      />
       <GalleryList
         galleryItems={galleryItems}
         fetchGalleryItems={fetchGalleryItems}
