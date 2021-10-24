@@ -10,6 +10,8 @@ import '@uppy/dashboard/dist/style.min.css';
 import Modal from 'react-modal';
 import DescriptionBox from '../DescriptionBox/DescriptionBox';
 
+let tempUploadedPhotos = [];
+
 function GalleryForm({ fetchGalleryItems }) {
   // initialize an uppy instance with the useUppy hook
   const uppy = useUppy(() => {
@@ -31,6 +33,7 @@ function GalleryForm({ fetchGalleryItems }) {
         // clear the uploadedPhotos to ensure only newly uploaded files are in
         // the descriptionModalBox
         setUploadedPhotos([]);
+        tempUploadedPhotos = [];
 
         // add these photos to the database, albeit without description
         for (let path of paths) {
@@ -40,6 +43,7 @@ function GalleryForm({ fetchGalleryItems }) {
           };
           postPhoto(newPhoto);
         }
+        setUploadedPhotos(tempUploadedPhotos);
         setDescriptionModalOpen(true);
       });
   });
@@ -74,7 +78,7 @@ function GalleryForm({ fetchGalleryItems }) {
       .post(`/gallery`, photo)
       .then((response) => {
         // add this id, path, and description so we can access it later
-        setUploadedPhotos([...uploadedPhotos, response.data.uploadedPhoto]);
+        tempUploadedPhotos.push(response.data.uploadedPhoto);
         // refresh the DOM
         fetchGalleryItems();
         // clear the inputs
@@ -90,7 +94,8 @@ function GalleryForm({ fetchGalleryItems }) {
     console.log(`about to update those descriptions`);
   };
 
-  console.log(`at this point, uploadedPhotos is`, uploadedPhotos);
+  console.log(`at this point, uploadedPhotos are`, uploadedPhotos);
+  console.log(`at this point, descriptions are`, updatedDescriptions);
 
   return (
     <div className="galleryForm">
@@ -158,7 +163,6 @@ function GalleryForm({ fetchGalleryItems }) {
         <h2>Please add photo description(s).</h2>
         <form id="descriptionBoxContainer">
           {uploadedPhotos.map((photo) => {
-            console.log(`currently handling photo`, photo);
             return (
               <DescriptionBox
                 key={photo.id}
