@@ -9,6 +9,10 @@
 # production
 /build
 
+# images on the server and uploaded on public
+/server/images
+/public/images
+
 # misc
 .DS_Store
 .env.local

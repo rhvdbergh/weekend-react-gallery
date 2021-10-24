@@ -18,7 +18,6 @@ function App() {
     axios
       .get(`/gallery`)
       .then((response) => {
-        console.log(`response.data`, response.data);
         // response.data contains the relevant information, objects with GalleryItems
         setGalleryItems(response.data);
       })
@@ -27,14 +26,15 @@ function App() {
       });
   };
 
-  console.log('galleryItems', galleryItems);
-
   return (
     <div className="App">
       <header className="App-header">
         <h1 className="App-title">Gallery of My Life</h1>
       </header>
-      <GalleryForm fetchGalleryItems={fetchGalleryItems} />
+      <GalleryForm
+        fetchGalleryItems={fetchGalleryItems}
+        galleryItems={galleryItems}
+      />
       <GalleryList
         galleryItems={galleryItems}
         fetchGalleryItems={fetchGalleryItems}

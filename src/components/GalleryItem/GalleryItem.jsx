@@ -58,7 +58,7 @@ function GalleryItem({ galleryItem, fetchGalleryItems }) {
           />
         )}
       </div>
-      <CardContent>
+      <CardContent className="cardContent">
         <Typography variant="body2" color="secondary">
           {galleryItem.likes === 0
             ? `No people love this ... yet.`
@@ -69,8 +69,8 @@ function GalleryItem({ galleryItem, fetchGalleryItems }) {
         <IconButton aria-label="like" onClick={() => addLike(galleryItem)}>
           <FavoriteIcon color="primary" />
         </IconButton>
-        <IconButton aria-label="info">
-          <InfoIcon color="info" onClick={flipImage} />
+        <IconButton aria-label="info" onClick={flipImage}>
+          <InfoIcon color="info" />
         </IconButton>
         <IconButton aria-label="delete" onClick={deleteGalleryItem}>
           <DeleteIcon color="warning" />
