@@ -2,11 +2,22 @@ import axios from 'axios';
 import { useState } from 'react';
 import { Button } from '@mui/material';
 import { TextField } from '@mui/material';
+import Uppy from '@uppy/core';
+import Tus from '@uppy/tus';
+import { DashboardModal, useUppy } from '@uppy/react';
+import '@uppy/core/dist/style.min.css';
+import '@uppy/dashboard/dist/style.min.css';
 
 function GalleryForm({ fetchGalleryItems }) {
+  const uppy = useUppy(() => {
+    // set the endpoint - where the files should be uploaded to
+    return new Uppy().use(Tus, { endpoint: '/images', resume: true });
+  });
+  // initialize an uppy instance with the useUppy hook
   // set up state to catch input from user
   const [pathInput, setPathInput] = useState('');
   const [descriptionInput, setDescriptionInput] = useState('');
+  const [uploadModalOpen, setUploadModalOpen] = useState(false);
 
   const addPhoto = (event) => {
     event.preventDefault();
@@ -66,7 +77,18 @@ function GalleryForm({ fetchGalleryItems }) {
         >
           Add Photo
         </Button>
+        <Button
+          id="uploadPhotoButton"
+          variant="contained"
+          color="success"
+          onClick={() => {
+            setUploadModalOpen(true);
+          }}
+        >
+          Upload Photo
+        </Button>
       </form>
+      <DashboardModal uppy={uppy} open={uploadModalOpen} />
     </div>
   );
 }

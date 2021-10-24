@@ -58,7 +58,7 @@ function GalleryItem({ galleryItem, fetchGalleryItems }) {
           />
         )}
       </div>
-      <CardContent>
+      <CardContent className="cardContent">
         <Typography variant="body2" color="secondary">
           {galleryItem.likes === 0
             ? `No people love this ... yet.`
