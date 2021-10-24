@@ -45,6 +45,7 @@ function GalleryList({ galleryItems, fetchGalleryItems }) {
             alt={currentFocusPic.description}
           ></img>
         </div>
+        <p>{currentFocusPic.description}</p>
       </Modal>
     </>
   );

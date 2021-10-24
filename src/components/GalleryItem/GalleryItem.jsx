@@ -73,7 +73,9 @@ function GalleryItem({
         <Typography variant="body2" color="secondary">
           {galleryItem.likes === 0
             ? `No people love this ... yet.`
-            : `${galleryItem.likes} people love this.`}
+            : `${galleryItem.likes} ${
+                galleryItem.likes === 1 ? 'person loves' : 'people love'
+              } this.`}
         </Typography>
       </CardContent>
       <CardActions disableSpacing className="buttonsContainer">

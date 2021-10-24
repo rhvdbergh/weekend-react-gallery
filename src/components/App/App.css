@@ -20,6 +20,7 @@ body {
 
 .galleryContainer {
   margin: auto;
+  margin-bottom: 50px;
   margin-top: 50px;
   width: 90%;
   display: grid;

@@ -103,8 +103,8 @@ function GalleryForm({ fetchGalleryItems }) {
     } // end for
     // clear everything that has to do with keeping track
     // of the newly uploaded photos
-    tempUploadedPhotos = {};
-    tempDescriptions = [];
+    tempUploadedPhotos = [];
+    tempDescriptions = {};
     setUpdatedDescriptions([]);
     setUploadedPhotos([]);
     // refresh the DOM
