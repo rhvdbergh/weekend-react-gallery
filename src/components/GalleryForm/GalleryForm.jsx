@@ -11,6 +11,7 @@ import Modal from 'react-modal';
 import DescriptionBox from '../DescriptionBox/DescriptionBox';
 
 let tempUploadedPhotos = [];
+let tempDescriptions = {};
 
 function GalleryForm({ fetchGalleryItems }) {
   // initialize an uppy instance with the useUppy hook
@@ -54,7 +55,6 @@ function GalleryForm({ fetchGalleryItems }) {
   const [descriptionModalOpen, setDescriptionModalOpen] = useState(false);
   const [uploadedPhotos, setUploadedPhotos] = useState([]);
   const [updatedDescriptions, setUpdatedDescriptions] = useState({});
-  let tempDescriptions = {};
 
   // TODO: feed the rigth info here
   const updateUploadedPhotoDescription = (photoIndex, description) => {
@@ -92,6 +92,24 @@ function GalleryForm({ fetchGalleryItems }) {
 
   const updateDescriptionsOnServer = () => {
     console.log(`about to update those descriptions`);
+    for (let photo of uploadedPhotos) {
+      axios
+        .put(`/gallery/description/${photo.id}`, {
+          description: updatedDescriptions[photo.id],
+        })
+        .then((response) => {})
+        .catch((err) => {
+          console.log(`There was an error posting data to the server:`, err);
+        });
+    } // end for
+    // clear everything that has to do with keeping track
+    // of the newly uploaded photos
+    tempUploadedPhotos = {};
+    tempDescriptions = [];
+    setUpdatedDescriptions([]);
+    setUploadedPhotos([]);
+    // refresh the DOM
+    fetchGalleryItems();
   };
 
   console.log(`at this point, descriptions are`, updatedDescriptions);
