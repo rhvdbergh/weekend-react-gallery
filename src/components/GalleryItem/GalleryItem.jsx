@@ -49,6 +49,8 @@ function GalleryItem({
       });
   };
 
+  // this will set the large image display modal to open,
+  // with the image in the current galleryItem as its focus
   const openImage = () => {
     setCurrentFocusPic(galleryItem);
     setPicModalOpen(true);
@@ -57,6 +59,7 @@ function GalleryItem({
   return (
     <Card className="galleryItem">
       <div className="imageContainer" onClick={flipImage}>
+        {/* Should the image or the description be displayed */}
         {flippedImage ? (
           <p className="imageDescription">{galleryItem.description}</p>
         ) : (

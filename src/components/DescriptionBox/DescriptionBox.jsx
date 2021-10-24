@@ -7,8 +7,12 @@ function DescriptionBox({
   photoIndex,
   photoDescription,
 }) {
+  // holds a description of this specific image, being set as the user types
   const [description, setDescription] = useState('');
 
+  // if the description changes for this specific image, update the description in GalleryForm
+  // do this each time the description changes (it's safer that way - the user can close the modal
+  // at any time)
   useEffect(() => {
     updateUploadedPhotoDescription(photoIndex, description);
   }, [description]);
@@ -19,6 +23,7 @@ function DescriptionBox({
         <img className="galleryPic" src={photoPath} alt="" />
       </div>
       <div className="space">
+        {/* This has to take an id, or the styling doesn't seem to work */}
         <TextField
           variant="outlined"
           multiline

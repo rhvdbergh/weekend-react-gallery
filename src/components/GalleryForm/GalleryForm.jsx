@@ -10,6 +10,8 @@ import '@uppy/dashboard/dist/style.min.css';
 import Modal from 'react-modal';
 import DescriptionBox from '../DescriptionBox/DescriptionBox';
 
+// temporary variables to update the uploaded photos and their descriptions
+// sets the state of this component when the user is done
 let tempUploadedPhotos = [];
 let tempDescriptions = {};
 
@@ -44,18 +46,30 @@ function GalleryForm({ fetchGalleryItems }) {
           };
           postPhoto(newPhoto);
         }
+        // keep track of these newly uploaded photos
+        // the tempUploadedPhotos is being set in the postPhotos()
+        // but it's creating a race condition with the React state handler
+        // so we're keeping track in the temporary variable instead
+        // here we're done, and we know that tempUploadedPhotos contain all the
+        // latest photos
         setUploadedPhotos(tempUploadedPhotos);
+        // allow the user to input descriptions for all these newly uploaded photos
+        // which don't have descriptions yet
         setDescriptionModalOpen(true);
       });
   });
   // set up state to catch input from user
   const [pathInput, setPathInput] = useState('');
   const [descriptionInput, setDescriptionInput] = useState('');
+  // state to handle whether the uploadmodal and the description modal should be open or closed
   const [uploadModalOpen, setUploadModalOpen] = useState(false);
   const [descriptionModalOpen, setDescriptionModalOpen] = useState(false);
+  // keeps track of the uploaded photos and their descriptions
+  // in order to update the info on the server
   const [uploadedPhotos, setUploadedPhotos] = useState([]);
   const [updatedDescriptions, setUpdatedDescriptions] = useState({});
 
+  // constantly being updated as the user enters information for each newly uploaded image
   const updateUploadedPhotoDescription = (photoIndex, description) => {
     tempDescriptions = { ...updatedDescriptions };
     tempDescriptions[photoIndex] = description;
@@ -64,7 +78,7 @@ function GalleryForm({ fetchGalleryItems }) {
 
   const addPhoto = (event) => {
     event.preventDefault();
-    // build a newPhoto object
+    // build a newPhoto object from the input boxes
     const newPhoto = {
       path: pathInput,
       description: descriptionInput,
@@ -77,6 +91,8 @@ function GalleryForm({ fetchGalleryItems }) {
       .post(`/gallery`, photo)
       .then((response) => {
         // add this id, path, and description so we can access it later
+        // we get this because the server is set up to send a response
+        // with all the info of the newly created db entry
         tempUploadedPhotos.push(response.data.uploadedPhoto);
         // refresh the DOM
         fetchGalleryItems();
@@ -90,7 +106,6 @@ function GalleryForm({ fetchGalleryItems }) {
   };
 
   const updateDescriptionsOnServer = () => {
-    console.log(`about to update those descriptions`);
     for (let photo of uploadedPhotos) {
       axios
         .put(`/gallery/description/${photo.id}`, {
@@ -111,12 +126,9 @@ function GalleryForm({ fetchGalleryItems }) {
     fetchGalleryItems();
   };
 
-  console.log(`at this point, descriptions are`, updatedDescriptions);
-
   return (
     <div id="galleryForm">
       <form id="addPhotoForm">
-        {/* <label htmlFor="photoPath">Path to photo</label> */}
         <div className="space">
           <TextField
             variant="outlined"
@@ -162,6 +174,7 @@ function GalleryForm({ fetchGalleryItems }) {
           </Button>
         </div>
       </form>
+      {/* The DashboardModal is an instance of uppy, used to upload files */}
       <DashboardModal
         uppy={uppy}
         open={uploadModalOpen}
@@ -170,7 +183,7 @@ function GalleryForm({ fetchGalleryItems }) {
         }}
         closeAfterFinish={true}
       />
-
+      {/* This model is the description box modal, used to update descriptions of uploaded photos */}
       <Modal
         style={{ overlay: { zIndex: 999 } }}
         isOpen={descriptionModalOpen}
@@ -183,6 +196,8 @@ function GalleryForm({ fetchGalleryItems }) {
         <form id="descriptionBoxForm">
           <div id="descriptionBoxContainer">
             {uploadedPhotos.map((photo) => {
+              // we're tracking these photos as they've been posted to the server
+              // now we can access them and their ids so the user can add descriptions
               return (
                 <DescriptionBox
                   key={photo.id}
