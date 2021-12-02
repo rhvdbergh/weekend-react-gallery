@@ -5,6 +5,7 @@ import GalleryForm from '../GalleryForm/GalleryForm';
 import axios from 'axios';
 import './App.css';
 
+// app
 function App() {
   let [galleryItems, setGalleryItems] = useState([]);
 
