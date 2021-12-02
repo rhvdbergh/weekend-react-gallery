@@ -146,8 +146,10 @@ function GalleryForm({ fetchGalleryItems }) {
             variant="outlined"
             label="Description"
             value={descriptionInput}
+            autocomplete="off"
             id="photoDescription"
             placeholder="That time when..."
+            autocomplete="off"
             onChange={() => {
               setDescriptionInput(event.target.value);
             }}

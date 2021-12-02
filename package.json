@@ -8,6 +8,7 @@
     "@emotion/styled": "^11.3.0",
     "@mui/icons-material": "^5.0.4",
     "@mui/material": "^5.0.4",
+    "@uppy/core": "^2.1.2",
     "@uppy/react": "^2.1.1",
     "@uppy/xhr-upload": "^2.0.5",
     "axios": "^0.19.2",
